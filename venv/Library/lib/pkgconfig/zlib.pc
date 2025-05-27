@@ -1,0 +1,13 @@
+prefix=D:/deepscan/venv/Library
+exec_prefix=D:/deepscan/venv/Library
+libdir=D:/deepscan/venv/Library/lib
+sharedlibdir=D:/deepscan/venv/Library/lib
+includedir=D:/deepscan/venv/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

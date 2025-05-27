@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepScan | AI-Powered Deepfake Detection</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #6e48aa;
+      --secondary: #9d50bb;
+      --accent: #4776e6;
+      --dark: #1a1a2e;
+      --light: #f8f9fa;
+      --danger: #e94560;
+      --success: #06d6a0;
+      --glass: rgba(255, 255, 255, 0.1);
+      --neon-glow: 0 0 10px rgba(110, 72, 170, 0.8);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--dark), #16213e);
+      color: var(--light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background Elements */
+    .bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-elements div {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(110, 72, 170, 0.1);
+      filter: blur(60px);
+      animation: float 15s infinite linear;
+    }
+
+    .bg-elements div:nth-child(1) {
+      width: 500px;
+      height: 500px;
+      top: -100px;
+      left: -100px;
+      animation-duration: 20s;
+    }
+
+    .bg-elements div:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      bottom: -50px;
+      right: -50px;
+      animation-duration: 25s;
+      animation-delay: 5s;
+    }
+
+    .bg-elements div:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      top: 50%;
+      right: -100px;
+      animation-duration: 30s;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(50px, 50px) rotate(180deg);
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background-color: var(--glass);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 10px;
+      font-size: 2rem;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login {
+      background: transparent;
+      color: var(--light);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-login:hover {
+      background: var(--primary);
+      box-shadow: var(--neon-glow);
+    }
+
+    .btn-signup {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: var(--light);
+    }
+
+    .btn-signup:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(110, 72, 170, 0.4);
+    }
+
+    /* Intro Section */
+    .intro {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5%;
+      position: relative;
+    }
+
+    .intro h1 {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, var(--light), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease forwards 0.5s;
+    }
+
+    .intro p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease forwards 1s;
+    }
+
+    .btn-get-started {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: var(--light);
+      font-size: 1.2rem;
+      padding: 1rem 2.5rem;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease forwards 1.5s;
+    }
+
+    .btn-get-started:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(110, 72, 170, 0.4);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 5rem 5%;
+      text-align: center;
+      background: rgba(26, 26, 46, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .team-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .team-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 3px;
+    }
+
+    .team-members {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .member-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(110, 72, 170, 0.3);
+    }
+
+    .member-photo::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right,
+              transparent,
+              transparent,
+              transparent,
+              var(--primary));
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+    }
+
+    .team-member:hover .member-photo::before {
+      animation: shine 1.5s;
+    }
+
+    @keyframes shine {
+      100% {
+        left: 150%;
+        top: 150%;
+      }
+    }
+
+    .team-member:hover .member-photo {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(110, 72, 170, 0.6);
+    }
+
+    .member-name {
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--light);
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Auth Modal */
+    .auth-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .auth-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .auth-container {
+      background: rgba(26, 26, 46, 0.9);
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(110, 72, 170, 0.3);
+    }
+
+    .auth-modal.active .auth-container {
+      transform: scale(1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--light);
+      transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    .auth-container h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 10px;
+      color: var(--light);
+      font-size: 1rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-bottom: 2px solid var(--primary);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-group label {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .form-group input:focus+label,
+    .form-group input:not(:placeholder-shown)+label {
+      top: -10px;
+      left: 10px;
+      font-size: 0.8rem;
+      background: var(--dark);
+      padding: 0 5px;
+      color: var(--primary);
+    }
+
+    .auth-submit {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: var(--light);
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .auth-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(110, 72, 170, 0.4);
+    }
+
+    .toggle-auth {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .toggle-auth span {
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-auth span:hover {
+      text-decoration: underline;
+    }
+
+    /* Detection Page */
+    .detection-page {
+      padding: 7rem 5% 5rem;
+      min-height: 100vh;
+      display: none;
+    }
+
+    .detection-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .detection-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--light), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .detection-header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .upload-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      margin-bottom: 3rem;
+    }
+
+    .upload-container:hover {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .upload-icon {
+      font-size: 5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .upload-text h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .upload-text p {
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 2rem;
+    }
+
+    .btn-upload {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: var(--light);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-upload:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(110, 72, 170, 0.4);
+    }
+
+    .btn-upload input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .results-container {
+      background: rgba(26, 26, 46, 0.7);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .results-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+    }
+
+    .real {
+      background: rgba(6, 214, 160, 0.2);
+      color: var(--success);
+      border: 2px solid var(--success);
+    }
+
+    .fake {
+      background: rgba(233, 69, 96, 0.2);
+      color: var(--danger);
+      border: 2px solid var(--danger);
+    }
+
+    .confidence-meter {
+      margin-top: 2rem;
+    }
+
+    .confidence-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .meter-container {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .meter-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+
+    .real-fill {
+      background: linear-gradient(to right, var(--success), #06d6a080);
+    }
+
+    .fake-fill {
+      background: linear-gradient(to right, var(--danger), #e9456080);
+    }
+
+    .video-preview {
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-preview video {
+      width: 100%;
+      display: block;
+    }
+
+    /* Loading Animation */
+    .loading-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .loading-spinner {
+      width: 70px;
+      height: 70px;
+      border: 5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s linear infinite;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .loading-dots::after {
+      content: '.';
+      animation: dots 1.5s steps(5, end) infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60% { content: '...'; }
+      80%,100% { content: ''; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .intro h1 { font-size: 3rem; }
+      .intro p { font-size: 1.2rem; }
+      .team-members {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      .member-photo { width: 150px; height: 150px; }
+      .auth-container { padding: 1.5rem; }
+      .upload-container { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-elements"><div></div><div></div><div></div></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+      <i class="fas fa-shield-alt"></i><span>DeepScan</span>
+    </div>
+    <div class="auth-buttons">
+      <button class="btn btn-login" id="loginBtn">Login</button>
+      <button class="btn btn-signup" id="signupBtn">Sign Up</button>
+    </div>
+  </nav>
+
+  <!-- Intro Section -->
+  <section class="intro" id="introSection">
+    <h1>Advanced Deepfake Detection</h1>
+    <p>Utilizing cutting-edge AI technology to identify manipulated media with unparalleled accuracy.</p>
+    <button class="btn btn-get-started" id="getStartedBtn">Get Started</button>
+  </section>
+
+  <!-- Team Section -->
+  <!--<section class="team-section">
+    <h2>Created By</h2>
+    <div class="team-members">
+      <div class="team-member">
+        <img src="/static/prasad.jpg" alt="Prasad" class="member-photo">
+        <span class="member-name">Prasad</span>
+      </div>
+      <div class="team-member">
+        <img src="/static/virendra.jpg" alt="Virendra" class="member-photo">
+        <span class="member-name">Virendra</span>
+      </div>
+      <div class="team-member">
+        <img src="/static/aditya.jpg" alt="Aditya" class="member-photo">
+        <span class="member-name">Aditya</span>
+      </div>
+      <div class="team-member">
+        <img src="/static/ashwin.jpg" alt="Ashwin" class="member-photo">
+        <span class="member-name">Ashwin</span>
+      </div>
+    </div>
+  </section>>-->
+
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-container">
+      <span class="close-btn" id="closeAuthModal">&times;</span>
+      <h2 id="authTitle">Login</h2>
+      <form class="auth-form" id="authForm">
+        <div class="form-group">
+          <input type="text" id="authEmail" placeholder=" " required>
+          <label for="authEmail">Email</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="authPassword" placeholder=" " required>
+          <label for="authPassword">Password</label>
+        </div>
+        <button type="submit" class="auth-submit" id="authSubmit">Login</button>
+        <div class="toggle-auth" id="toggleAuthText">
+          Don't have an account? <span id="toggleAuthSpan">Sign Up</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Detection Page -->
+  <section class="detection-page" id="detectionPage" style="display:none">
+    <div class="detection-header">
+      <h1>Deepfake Detection</h1>
+      <p>Upload a video file to analyze its authenticity using our advanced deep learning models.</p>
+    </div>
+    <div class="upload-container">
+      <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+      <div class="upload-text">
+        <h2>Upload Your Video</h2>
+        <p>Supported formats: MP4, MOV, AVI (Max 100MB)</p>
+      </div>
+      <button class="btn-upload">
+        Choose File
+        <input type="file" id="videoUpload" accept="video/*" />
+      </button>
+    </div>
+    <div class="loading-container" id="loadingContainer" style="display:none">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Analyzing video<span class="loading-dots"></span></p>
+    </div>
+    <div class="results-container" id="resultsContainer" style="display:none">
+      <div class="results-header">
+        <h2>Analysis Result</h2>
+        <div class="result-value real" id="resultValue">REAL</div>
+      </div>
+      <div class="video-preview">
+        <video controls id="videoPreview"></video>
+      </div>
+      <!-- Replay button -->
+      <button id="replayBtn" class="btn btn-get-started" style="margin:1rem auto;display:block;">
+        Replay Video
+      </button>
+      <div class="confidence-meter">
+        <div class="confidence-header">
+          <span>Confidence Level</span><span id="confidencePercent">0%</span>
+        </div>
+        <div class="meter-container">
+          <div class="meter-fill real-fill" id="meterFill" style="width:0%"></div>
+        </div>
+        <p>Our analysis indicates this video is <strong id="confidenceText">likely authentic</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // SHOW DETECTION PAGE
+    const getStartedBtn = document.getElementById('getStartedBtn');
+    const introSection = document.getElementById('introSection');
+    const detectionPage = document.getElementById('detectionPage');
+    getStartedBtn.addEventListener('click', () => {
+      introSection.style.display = 'none';
+      detectionPage.style.display = 'block';
+      window.scrollTo(0, 0);
+    });
+
+    // AUTH MODAL LOGIC
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const authModal = document.getElementById('authModal');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const authTitle = document.getElementById('authTitle');
+    const authSubmit = document.getElementById('authSubmit');
+    const toggleAuthText = document.getElementById('toggleAuthText');
+    const authButtons = document.querySelector('.auth-buttons');
+    let isLogin = true;
+
+    loginBtn.addEventListener('click', () => {
+      isLogin = true;
+      authTitle.textContent = 'Login';
+      authSubmit.textContent = 'Login';
+      toggleAuthText.innerHTML = `Don't have an account? <span id="toggleAuthSpan">Sign Up</span>`;
+      authModal.classList.add('active');
+    });
+    signupBtn.addEventListener('click', () => {
+      isLogin = false;
+      authTitle.textContent = 'Sign Up';
+      authSubmit.textContent = 'Sign Up';
+      toggleAuthText.innerHTML = `Already have an account? <span id="toggleAuthSpan">Login</span>`;
+      authModal.classList.add('active');
+    });
+    closeAuthModal.addEventListener('click', () => authModal.classList.remove('active'));
+    authModal.addEventListener('click', e => {
+      if (e.target === authModal) authModal.classList.remove('active');
+      if (e.target.id === 'toggleAuthSpan') {
+        isLogin = !isLogin;
+        if (isLogin) {
+          authTitle.textContent = 'Login';
+          authSubmit.textContent = 'Login';
+          toggleAuthText.innerHTML = `Don't have an account? <span id="toggleAuthSpan">Sign Up</span>`;
+        } else {
+          authTitle.textContent = 'Sign Up';
+          authSubmit.textContent = 'Sign Up';
+          toggleAuthText.innerHTML = `Already have an account? <span id="toggleAuthSpan">Login</span>`;
+        }
+      }
+    });
+    document.getElementById('authForm').addEventListener('submit', e => {
+      e.preventDefault();
+      authModal.classList.remove('active');
+      authButtons.style.display = 'none';
+      alert(isLogin ? 'Logged in successfully!' : 'Signed up successfully!');
+    });
+
+    // VIDEO UPLOAD & DETECTION
+    const videoUpload = document.getElementById('videoUpload');
+    const loadingContainer = document.getElementById('loadingContainer');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const videoPreview = document.getElementById('videoPreview');
+    const resultValue = document.getElementById('resultValue');
+    const confidencePercent = document.getElementById('confidencePercent');
+    const meterFill = document.getElementById('meterFill');
+    const confidenceText = document.getElementById('confidenceText');
+    const replayBtn = document.getElementById('replayBtn');
+
+    // allow re-selecting same file
+    videoUpload.addEventListener('click', () => { videoUpload.value = null; });
+
+    videoUpload.addEventListener('change', async e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      loadingContainer.style.display = 'flex';
+      resultsContainer.style.display = 'none';
+      videoPreview.src = URL.createObjectURL(file);
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const resp = await fetch("/detect/", { method: "POST", body: formData });
+        const result = await resp.json();
+        loadingContainer.style.display = 'none';
+        resultsContainer.style.display = 'block';
+
+        const isFake = result.fake;
+        const confidence = Math.round(result.confidence * 100);
+
+        if (isFake) {
+          resultValue.textContent = 'FAKE';
+          resultValue.classList.replace('real', 'fake');
+          meterFill.classList.replace('real-fill', 'fake-fill');
+          confidenceText.textContent = 'likely manipulated';
+        } else {
+          resultValue.textContent = 'REAL';
+          resultValue.classList.replace('fake', 'real');
+          meterFill.classList.replace('fake-fill', 'real-fill');
+          confidenceText.textContent = 'likely authentic';
+        }
+        meterFill.style.width = `${confidence}%`;
+        confidencePercent.textContent = `${confidence}%`;
+      } catch (err) {
+        console.error("Detection error:", err);
+        loadingContainer.style.display = 'none';
+        alert("Error analyzing video. Check console.");
+      }
+    });
+
+    // REPLAY BUTTON
+    replayBtn.addEventListener('click', () => {
+      videoPreview.currentTime = 0;
+      videoPreview.play();
+    });
+  </script>
+</body>
+</html>

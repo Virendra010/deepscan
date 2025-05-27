@@ -1,0 +1,252 @@
+[
+  {
+    "fake": true,
+    "confidence": 0.9999998807907104,
+    "path": "D:\\deepfake4\\data\\input_videos\\00010_id00943_LxSv2rnBGA8_id01175_wavtolip.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9999912977218628,
+    "path": "D:\\deepfake4\\data\\input_videos\\00010_id01035_6EWG3Ywu3jg_id04221_wavtolip.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.999893069267273,
+    "path": "D:\\deepfake4\\data\\input_videos\\00010_id01035_wavtolip.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9999994039535522,
+    "path": "D:\\deepfake4\\data\\input_videos\\arjun_fake.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 1.0,
+    "path": "D:\\deepfake4\\data\\input_videos\\arjun_real.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.999538779258728,
+    "path": "D:\\deepfake4\\data\\input_videos\\black_fake.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9999990463256836,
+    "path": "D:\\deepfake4\\data\\input_videos\\fake4.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.09824635833501816,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_0000.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9995467066764832,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_0001.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.00729752192273736,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_0002.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.0027001858688890934,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_0003.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9964630007743835,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id16_0005.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.646565318107605,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id16_0006.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9938965439796448,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id16_0007.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9978982210159302,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id16_0008.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.5421555042266846,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id16_0009.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.992186427116394,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id17_0000.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9995629191398621,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id17_0001.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997207522392273,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id17_0002.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9985299110412598,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id17_0003.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9872024655342102,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id17_0005.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9869357943534851,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id17_0006.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9996356964111328,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0001.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997653365135193,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0002.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9977099895477295,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0003.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.996342122554779,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0005 copy.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.996342122554779,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0005.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9981257319450378,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0006.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997699856758118,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0007.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9877400994300842,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id1_0009.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9904335737228394,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0000.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9996192455291748,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0001.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997902512550354,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0002.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9996316432952881,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0003.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997724890708923,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0004.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9989311099052429,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0005.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9724143147468567,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0006.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9996664524078369,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0007.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9992237091064453,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0008.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.39616429805755615,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id2_0009.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.993594229221344,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id3_0000.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9996435642242432,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id3_0001.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997850060462952,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id3_0002.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9025042057037354,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id3_0003.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9997351765632629,
+    "path": "D:\\deepfake4\\data\\input_videos\\id0_id3_0004.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.42335280776023865,
+    "path": "D:\\deepfake4\\data\\input_videos\\r2.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.1126958429813385,
+    "path": "D:\\deepfake4\\data\\input_videos\\r3.mp4"
+  },
+  {
+    "fake": false,
+    "confidence": 0.5831446647644043,
+    "path": "D:\\deepfake4\\data\\input_videos\\real1.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9999997615814209,
+    "path": "D:\\deepfake4\\data\\input_videos\\VidMage-20250405102326.mp4"
+  },
+  {
+    "fake": true,
+    "confidence": 0.9999936819076538,
+    "path": "D:\\deepfake4\\data\\input_videos\\VID_20250405_021930.mp4"
+  }
+]
